@@ -41,7 +41,7 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="card-project"
+              className="card-project group"
               onClick={() => setSelectedProject(project)}
             >
               {/* Project Header */}
