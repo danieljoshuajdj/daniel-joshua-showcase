@@ -43,8 +43,8 @@ const Navigation = () => {
       transition={{ duration: 0.8 }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled 
-          ? 'bg-card/95 backdrop-blur-lg shadow-elegant' 
-          : 'bg-transparent'
+          ? 'bg-primary/95 backdrop-blur-lg shadow-elegant' 
+          : 'bg-primary/90'
       }`}
     >
       <div className="container mx-auto px-6">
@@ -52,7 +52,7 @@ const Navigation = () => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="font-bold text-xl text-primary cursor-pointer"
+            className="font-bold text-xl text-white cursor-pointer"
             onClick={() => scrollToSection('hero')}
           >
             {portfolioData.personalInfo.name}
@@ -68,8 +68,8 @@ const Navigation = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`font-medium transition-colors duration-200 ${
                   currentSection === item.id
-                    ? 'text-primary'
-                    : 'text-muted-foreground hover:text-primary'
+                    ? 'text-success-glow'
+                    : 'text-white/80 hover:text-success-glow'
                 }`}
               >
                 {item.label}
@@ -80,7 +80,7 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-muted-foreground hover:text-primary transition-colors duration-200"
+            className="md:hidden p-2 text-white/80 hover:text-success-glow transition-colors duration-200"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -106,8 +106,8 @@ const Navigation = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`block w-full text-left font-medium transition-colors duration-200 ${
                   currentSection === item.id
-                    ? 'text-primary'
-                    : 'text-muted-foreground hover:text-primary'
+                    ? 'text-success-glow'
+                    : 'text-white/80 hover:text-success-glow'
                 }`}
               >
                 {item.label}

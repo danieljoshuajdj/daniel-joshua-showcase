@@ -51,26 +51,43 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
     const { contactForm } = get();
     
     // Validate form
-    if (!contactForm.name || !contactForm.email || !contactForm.message) {
-      alert('Please fill in all required fields');
+    if (!contactForm.name || contactForm.name.trim().length < 2) {
+      alert('Name must be at least 2 characters long');
       return;
     }
     
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(contactForm.email)) {
+    if (!contactForm.email || !/^\S+@\S+\.\S+$/.test(contactForm.email)) {
       alert('Please enter a valid email address');
+      return;
+    }
+    
+    if (!contactForm.message || contactForm.message.trim().length < 10) {
+      alert('Message must be at least 10 characters long');
+      return;
+    }
+    
+    if (!contactForm.jobRequirements || contactForm.jobRequirements.trim().length < 20) {
+      alert('Job requirements must be at least 20 characters long');
       return;
     }
     
     set({ isLoading: true });
     
-    // Simulate form submission
+    // Simulate email sending process
     setTimeout(() => {
-      console.log('Contact Form Submitted:', contactForm);
-      alert('Thank you for your interest! I will get back to you soon.');
+      console.log('📧 Email Sent Successfully!');
+      console.log('=========================');
+      console.log('To: danieljoshuaisrael@protonmail.com');
+      console.log('Subject: New Hiring Inquiry from ' + contactForm.name);
+      console.log('From:', contactForm.email);
+      console.log('Message:', contactForm.message);
+      console.log('Job Requirements:', contactForm.jobRequirements);
+      console.log('Timestamp:', new Date().toISOString());
+      console.log('=========================');
+      
+      alert('✅ Thank you! Your enquiry has been successfully submitted. I will get back to you within 24 hours.');
       get().resetContactForm();
       set({ isLoading: false, isContactFormVisible: false });
-    }, 1500);
+    }, 2000);
   }
 }));

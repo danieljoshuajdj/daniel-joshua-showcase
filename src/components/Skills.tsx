@@ -86,7 +86,7 @@ const Skills = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.3 }}
-                className="bg-success/10 text-success-foreground px-6 py-3 rounded-full border border-success/20 hover:bg-success/20 transition-all duration-300 cursor-default"
+                className="bg-success text-white px-6 py-3 rounded-full border border-success/20 hover:bg-success-glow hover:scale-105 transition-all duration-300 cursor-default font-medium"
               >
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4" />

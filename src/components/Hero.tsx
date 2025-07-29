@@ -62,9 +62,9 @@ const Hero = () => {
               <img
                 src={portfolioData.personalInfo.profileImage}
                 alt={portfolioData.personalInfo.name}
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto border-4 border-white/20 shadow-2xl"
+                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto border-4 border-white/30 shadow-2xl"
               />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 to-success/20"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-success/10"></div>
             </div>
           </motion.div>
           
