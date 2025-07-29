@@ -1,0 +1,187 @@
+{
+  "personalInfo": {
+    "name": "Daniel Joshua",
+    "title": "React JS Developer",
+    "phone": "+91 8754860740",
+    "email": "danieljoshuaisrael@protonmail.com",
+    "linkedin": "https://linkedin.com/in/danieljoshua",
+    "github": "https://github.com/danieljoshua",
+    "profileImage": "/lovable-uploads/da949b13-5fa4-494e-bf34-b3106f8253b7.png"
+  },
+  "typingText": [
+    "React JS Developer",
+    "Full Stack Developer", 
+    "Problem Solver",
+    "Innovator",
+    "Frontend Expert"
+  ],
+  "objective": "React JS Developer with over a year of experience at Codoid Innovation Pvt Ltd., proficient in React, Redux Toolkit, React Query, Zustand, JavaScript, and various web technologies. Proven expertise in delivering solutions across industries like healthcare, e-commerce, and property management. Seeking to contribute to innovative projects and solve complex challenges.",
+  "experience": [
+    {
+      "id": 1,
+      "role": "React JS Developer",
+      "company": "Codoid Innovation Pvt Ltd.",
+      "duration": "May 2024 – Present",
+      "location": "Chennai, India",
+      "responsibilities": [
+        "Delivered 7 React projects across healthcare, e-commerce, and property management sectors",
+        "Implemented state management using Redux Toolkit, React Query, Zustand, Thunk, and Saga",
+        "Developed responsive UI components with HTML5, CSS3, SCSS and integrated RESTful APIs",
+        "Collaborated with cross-functional teams to deliver high-quality solutions on time"
+      ]
+    },
+    {
+      "id": 2,
+      "role": "Intern",
+      "company": "Spangles Infotech",
+      "duration": "Nov 2021 – Mar 2022",
+      "location": "Nagercoil, India",
+      "responsibilities": [
+        "Assisted in developing web pages using HTML/CSS",
+        "Collaborated on Python programming basics and web development fundamentals",
+        "Gained hands-on experience in software development lifecycle"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "BE in Mechanical Engineering",
+      "institution": "Ponjesly College of Engineering",
+      "location": "Parvathipuram",
+      "duration": "2019 – 2023"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Full Stack Python Development",
+      "institution": "Qspiders, Vadapalani",
+      "duration": "Aug 2023 – May 2024",
+      "description": "Comprehensive training in Python Django, React JS, HTML5, CSS3, Oracle SQL, and JavaScript"
+    },
+    {
+      "title": "Python Programming Course",
+      "institution": "CSC, Nagercoil",
+      "duration": "Nov 2021 – Mar 2022",
+      "description": "Fundamentals of Python programming and web development basics"
+    }
+  ],
+  "technicalSkills": [
+    {
+      "category": "Frontend Technologies",
+      "skills": ["React JS", "Redux Toolkit", "React Query", "Zustand", "HTML5", "CSS3", "SCSS", "JavaScript", "Next JS"]
+    },
+    {
+      "category": "Backend Technologies", 
+      "skills": ["Node.js", "Express.js", "Python", "Django"]
+    },
+    {
+      "category": "Database & Storage",
+      "skills": ["MongoDB", "Mongoose", "Oracle SQL"]
+    },
+    {
+      "category": "State Management",
+      "skills": ["Redux Toolkit", "React Query", "Zustand", "Thunk", "Saga"]
+    }
+  ],
+  "softSkills": [
+    "Teamwork",
+    "Problem-solving", 
+    "Communication",
+    "Attention to Detail",
+    "Project Management",
+    "Code Review"
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "IVF App Web Application",
+      "description": "Comprehensive hospital management system that improved patient data handling and scheduling management for IVF treatments.",
+      "technologies": ["React JS", "Redux Toolkit", "Thunk", "CSS3"],
+      "features": [
+        "Patient data management system",
+        "Appointment scheduling interface", 
+        "Real-time status updates",
+        "Responsive design for all devices"
+      ],
+      "industry": "Healthcare"
+    },
+    {
+      "id": 2,
+      "title": "Property Management System",
+      "description": "Streamlined property management solution designed specifically for the UK market with advanced filtering and search capabilities.",
+      "technologies": ["React JS", "Redux Toolkit", "React Query", "SCSS"],
+      "features": [
+        "Property listing management",
+        "Advanced search and filtering",
+        "Tenant management system",
+        "Financial reporting dashboard"
+      ],
+      "industry": "Real Estate"
+    },
+    {
+      "id": 3,
+      "title": "E-commerce Website for Books",
+      "description": "Modern e-commerce platform that enhanced user experience and significantly boosted online book sales.",
+      "technologies": ["React JS", "Redux Toolkit", "React Query", "CSS3"],
+      "features": [
+        "Product catalog with search",
+        "Shopping cart functionality",
+        "User authentication system",
+        "Payment gateway integration"
+      ],
+      "industry": "E-commerce"
+    },
+    {
+      "id": 4,
+      "title": "Job Portal Application",
+      "description": "Comprehensive job portal enabling efficient connections between job seekers and recruiters with advanced matching algorithms.",
+      "technologies": ["React JS", "Redux Toolkit", "JavaScript", "Saga"],
+      "features": [
+        "Job search and filtering",
+        "Resume upload and management",
+        "Recruiter dashboard",
+        "Application tracking system"
+      ],
+      "industry": "HR Tech"
+    },
+    {
+      "id": 5,
+      "title": "Food Packaging E-commerce",
+      "description": "Specialized e-commerce platform for food packaging covers that increased product reach in the UK market.",
+      "technologies": ["React JS", "Redux Toolkit", "CSS3"],
+      "features": [
+        "Product catalog management",
+        "B2B ordering system",
+        "Inventory tracking",
+        "Custom packaging options"
+      ],
+      "industry": "Manufacturing"
+    },
+    {
+      "id": 6,
+      "title": "Turf Management App",
+      "description": "Comprehensive turf operations management system streamlining operations across multiple locations in India.",
+      "technologies": ["React JS", "Redux Toolkit", "React Query", "SCSS"],
+      "features": [
+        "Booking management system",
+        "Resource allocation",
+        "Payment processing",
+        "Analytics dashboard"
+      ],
+      "industry": "Sports & Recreation"
+    },
+    {
+      "id": 7,
+      "title": "No-Code Project Management",
+      "description": "Innovative project management application that manages project stages and timelines without requiring backend coding expertise.",
+      "technologies": ["React JS", "Redux Toolkit", "Zustand", "CSS3"],
+      "features": [
+        "Drag-and-drop project boards",
+        "Timeline visualization",
+        "Team collaboration tools",
+        "Progress tracking"
+      ],
+      "industry": "Project Management"
+    }
+  ]
+}
