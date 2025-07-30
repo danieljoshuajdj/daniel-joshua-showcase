@@ -4,6 +4,7 @@ import { usePortfolioStore } from '../store/portfolioStore';
 import portfolioData from '../data/portfolio.json';
 import ConfirmDialog from './ui/ConfirmDialog';
 import { Toaster } from './ui/toaster';
+import { useForm, ValidationError } from '@formspree/react';
 
 const Contact = () => {
   const { 
@@ -50,6 +51,10 @@ const Contact = () => {
     },
   ];
 
+  const [formState, handleSubmit] = useForm("xanbboyl");
+  if (formState.succeeded) {
+    return <p>Thanks for joining!</p>;
+}
   return (
     <section id="contact" className="py-20 bg-section">
       <div className="container mx-auto px-6">
@@ -94,8 +99,8 @@ const Contact = () => {
                     <method.icon className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <div className="font-semibold text-card-foreground">{method.label}</div>
-                    <div className="text-muted-foreground">{method.value}</div>
+                    <div className="font-semibold text-card-foreground ">{method.label}</div>
+                    <div className="text-muted-foreground text-xs md:text-sm">{method.value}</div>
                   </div>
                 </motion.a>
               ))}
@@ -129,49 +134,70 @@ const Contact = () => {
           >
             <h3 className="text-2xl font-bold text-card-foreground mb-6">Quick Message</h3>
             
-            <div className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-card-foreground mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-card-foreground mb-2">
                   Your Name *
                 </label>
                 <input
+                  id='name'
+                  name='name'
                   type="text"
                   value={contactForm.name}
                   onChange={(e) => updateContactForm('name', e.target.value)}
                   placeholder="Enter your name"
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
                 />
+                <ValidationError 
+        prefix="Name" 
+        field="name"
+        errors={formState.errors}
+      />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-card-foreground mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-card-foreground mb-2">
                   Email Address *
                 </label>
                 <input
                   type="email"
+                  id='email'
+                  name='email'
                   value={contactForm.email}
                   onChange={(e) => updateContactForm('email', e.target.value)}
                   placeholder="your@email.com"
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
                 />
+                 <ValidationError 
+        prefix="Email" 
+        field="email"
+        errors={formState.errors}
+      />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-card-foreground mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-card-foreground mb-2">
                   Message *
                 </label>
                 <textarea
+                  id='message'
+                  name='message'
                   value={contactForm.message}
                   onChange={(e) => updateContactForm('message', e.target.value)}
                   placeholder="Tell me about your project..."
                   rows={3}
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 resize-none"
                 />
+                 <ValidationError 
+        prefix="Message" 
+        field="message"
+        errors={formState.errors}
+      />
               </div>
               
               <div className="pt-4 space-y-3">
                 <button
-                  onClick={handleFormSubmit}
+                  // onClick={handleFormSubmit}
                   disabled={isLoading}
                   className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -194,7 +220,7 @@ const Contact = () => {
                   Need to add job requirements? Open full form
                 </button>
               </div>
-            </div>
+            </form>
           </motion.div>
         </div>
 

@@ -46,7 +46,7 @@ const Navigation = () => {
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled 
           ? 'bg-white backdrop-blur-lg shadow-elegant' 
-          : 'bg-white'
+          : ''
       }`}
     >
       <div className="container mx-auto px-6">

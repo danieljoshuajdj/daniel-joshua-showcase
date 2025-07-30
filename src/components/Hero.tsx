@@ -36,6 +36,9 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, currentTextIndex, typingTexts]);
 
+  const downloadResumeFunc = ()=>{
+    window.open("https://drive.google.com/file/d/1WNgnH_ETxPq3GWjJNk5VyDkDKwFnFd_v/view?usp=drivesdk","_blank",'noopener,noreferrer')
+  }
   return (
     <section className="min-h-screen bg-hero flex items-center justify-center relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -120,7 +123,7 @@ const Hero = () => {
               Hire Me Now
             </button>
             
-            <button className="btn-secondary hover:scale-105 transform transition-all duration-300 flex items-center gap-2 text-lg px-8 py-4">
+            <button onClick={downloadResumeFunc} className="btn-secondary hover:scale-105 transform transition-all duration-300 flex items-center gap-2 text-lg px-8 py-4">
               <Download className="w-5 h-5" />
               Download CV
             </button>
