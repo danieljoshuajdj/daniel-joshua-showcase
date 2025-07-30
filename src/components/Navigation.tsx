@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { usePortfolioStore } from '../store/portfolioStore';
+import { useActiveSection } from '../hooks/useActiveSection';
 import portfolioData from '../data/portfolio.json';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { currentSection, setCurrentSection } = usePortfolioStore();
+  const { setCurrentSection } = usePortfolioStore();
+  const currentSection = useActiveSection();
 
   const navItems = [
     { id: 'hero', label: 'Home' },
@@ -44,7 +46,7 @@ const Navigation = () => {
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled 
           ? 'bg-white backdrop-blur-lg shadow-elegant' 
-          : 'bg-whitee'
+          : 'bg-white'
       }`}
     >
       <div className="container mx-auto px-6">
@@ -52,10 +54,10 @@ const Navigation = () => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="font-bold text-xl text-white cursor-pointer"
+            className={`font-bold text-xl cursor-pointer ${scrolled ? 'text-black' : 'text-white'}`}
             onClick={() => scrollToSection('hero')}
           >
-            {portfolioData.personalInfo.name} 
+            {portfolioData.personalInfo.name}
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -69,8 +71,8 @@ const Navigation = () => {
                 className={`font-medium transition-colors duration-200 ${
                   currentSection === item.id
                     ? 'text-success-glow'
-                    : 'text-white/80 hover:text-success-glow'
-                } ${scrolled ? 'text-black' : 'text-white'}` }
+                    : `${scrolled ? 'text-black/80 hover:text-success-glow' : 'text-white/80 hover:text-success-glow'}`
+                }`}
               >
                 {item.label}
               </motion.button>

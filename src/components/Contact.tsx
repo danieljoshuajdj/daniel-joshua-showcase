@@ -2,16 +2,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, Linkedin, Github, X, Send, Loader } from 'lucide-react';
 import { usePortfolioStore } from '../store/portfolioStore';
 import portfolioData from '../data/portfolio.json';
+import ConfirmDialog from './ui/ConfirmDialog';
+import { Toaster } from './ui/toaster';
 
 const Contact = () => {
   const { 
     contactForm, 
     isContactFormVisible, 
     isLoading,
+    showConfirmDialog,
+    confirmAction,
     updateContactForm, 
     toggleContactForm, 
-    submitContactForm 
+    submitContactForm,
+    showConfirm,
+    hideConfirm
   } = usePortfolioStore();
+
+  const handleFormSubmit = () => {
+    showConfirm(() => submitContactForm());
+  };
 
   const contactMethods = [
     {
@@ -109,7 +119,7 @@ const Contact = () => {
             </motion.div>
           </motion.div>
 
-          {/* Contact Form Preview */}
+          {/* Quick Message Form */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -124,35 +134,64 @@ const Contact = () => {
                 <label className="block text-sm font-medium text-card-foreground mb-2">
                   Your Name *
                 </label>
-                <div className="h-12 bg-muted rounded-lg flex items-center px-3 text-muted-foreground">
-                  Click "Hire Me" to open full form
-                </div>
+                <input
+                  type="text"
+                  value={contactForm.name}
+                  onChange={(e) => updateContactForm('name', e.target.value)}
+                  placeholder="Enter your name"
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                />
               </div>
               
               <div>
                 <label className="block text-sm font-medium text-card-foreground mb-2">
                   Email Address *
                 </label>
-                <div className="h-12 bg-muted rounded-lg flex items-center px-3 text-muted-foreground">
-                  your@email.com
-                </div>
+                <input
+                  type="email"
+                  value={contactForm.email}
+                  onChange={(e) => updateContactForm('email', e.target.value)}
+                  placeholder="your@email.com"
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                />
               </div>
               
               <div>
                 <label className="block text-sm font-medium text-card-foreground mb-2">
                   Message *
                 </label>
-                <div className="h-24 bg-muted rounded-lg flex items-center px-3 text-muted-foreground">
-                  Tell me about your project...
-                </div>
+                <textarea
+                  value={contactForm.message}
+                  onChange={(e) => updateContactForm('message', e.target.value)}
+                  placeholder="Tell me about your project..."
+                  rows={3}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 resize-none"
+                />
               </div>
               
-              <div className="pt-4">
+              <div className="pt-4 space-y-3">
+                <button
+                  onClick={handleFormSubmit}
+                  disabled={isLoading}
+                  className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader className="w-5 h-5 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Send Quick Message
+                    </>
+                  )}
+                </button>
                 <button
                   onClick={toggleContactForm}
-                  className="btn-primary w-full"
+                  className="w-full px-4 py-2 text-primary hover:text-primary/80 transition-colors duration-200"
                 >
-                  Open Full Contact Form
+                  Need to add job requirements? Open full form
                 </button>
               </div>
             </div>
@@ -248,7 +287,7 @@ const Contact = () => {
                   </div>
 
                   <button
-                    onClick={submitContactForm}
+                    onClick={handleFormSubmit}
                     disabled={isLoading}
                     className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
@@ -269,6 +308,20 @@ const Contact = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Confirmation Dialog */}
+        <ConfirmDialog
+          isOpen={showConfirmDialog}
+          onClose={hideConfirm}
+          onConfirm={confirmAction || (() => {})}
+          title="Send Message"
+          message="Are you sure you want to send this message? This will submit your enquiry to Daniel Joshua."
+          confirmText="Send Message"
+          cancelText="Cancel"
+        />
+
+        {/* Toast Notifications */}
+        <Toaster />
       </div>
     </section>
   );

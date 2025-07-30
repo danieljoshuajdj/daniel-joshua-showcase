@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { toast } from '@/hooks/use-toast';
 
 interface ContactForm {
   name: string;
@@ -12,12 +13,16 @@ interface PortfolioState {
   isLoading: boolean;
   contactForm: ContactForm;
   isContactFormVisible: boolean;
+  showConfirmDialog: boolean;
+  confirmAction: (() => void) | null;
   setCurrentSection: (section: string) => void;
   setLoading: (loading: boolean) => void;
   updateContactForm: (field: keyof ContactForm, value: string) => void;
   resetContactForm: () => void;
   toggleContactForm: () => void;
   submitContactForm: () => void;
+  showConfirm: (action: () => void) => void;
+  hideConfirm: () => void;
 }
 
 const initialContactForm: ContactForm = {
@@ -32,6 +37,8 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
   isLoading: false,
   contactForm: initialContactForm,
   isContactFormVisible: false,
+  showConfirmDialog: false,
+  confirmAction: null,
   
   setCurrentSection: (section) => set({ currentSection: section }),
   
@@ -47,27 +54,48 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
   toggleContactForm: () => 
     set((state) => ({ isContactFormVisible: !state.isContactFormVisible })),
   
+  showConfirm: (action) => set({ showConfirmDialog: true, confirmAction: action }),
+  
+  hideConfirm: () => set({ showConfirmDialog: false, confirmAction: null }),
+  
   submitContactForm: () => {
     const { contactForm } = get();
     
     // Validate form
     if (!contactForm.name || contactForm.name.trim().length < 2) {
-      alert('Name must be at least 2 characters long');
+      toast({
+        title: "Validation Error",
+        description: "Name must be at least 2 characters long",
+        variant: "destructive",
+      });
       return;
     }
     
     if (!contactForm.email || !/^\S+@\S+\.\S+$/.test(contactForm.email)) {
-      alert('Please enter a valid email address');
+      toast({
+        title: "Validation Error", 
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
       return;
     }
     
     if (!contactForm.message || contactForm.message.trim().length < 10) {
-      alert('Message must be at least 10 characters long');
+      toast({
+        title: "Validation Error",
+        description: "Message must be at least 10 characters long", 
+        variant: "destructive",
+      });
       return;
     }
     
-    if (!contactForm.jobRequirements || contactForm.jobRequirements.trim().length < 20) {
-      alert('Job requirements must be at least 20 characters long');
+    // Job requirements is optional for quick messages
+    if (contactForm.jobRequirements && contactForm.jobRequirements.trim().length > 0 && contactForm.jobRequirements.trim().length < 20) {
+      toast({
+        title: "Validation Error",
+        description: "Job requirements must be at least 20 characters long if provided",
+        variant: "destructive",
+      });
       return;
     }
     
@@ -85,7 +113,10 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
       console.log('Timestamp:', new Date().toISOString());
       console.log('=========================');
       
-      alert('✅ Thank you! Your enquiry has been successfully submitted. I will get back to you within 24 hours.');
+      toast({
+        title: "Message Sent Successfully!",
+        description: "Thank you! Your enquiry has been submitted. I will get back to you within 24 hours.",
+      });
       get().resetContactForm();
       set({ isLoading: false, isContactFormVisible: false });
     }, 2000);
