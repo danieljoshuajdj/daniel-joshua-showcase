@@ -44,7 +44,7 @@ const Hero = () => {
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
       </div>
       
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="container mx-auto px-6 text-center relative">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -58,13 +58,13 @@ const Hero = () => {
             transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
             className="mb-8"
           >
-            <div className="relative inline-block">
+            <div className="relative inline-block mt-16">
               <img
                 src={portfolioData.personalInfo.profileImage}
                 alt={portfolioData.personalInfo.name}
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto border-4 border-white/30 shadow-2xl"
+                className="w-32 h-32 md:w-64 md:h-64 rounded-full object-cover mx-auto border-4 border-white/30 shadow-2x1"
               />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-success/10"></div>
+              <div className="absolute -inset-5 rounded-full bg-gradient-to-tr from-primary/10 to-success/20"></div>
             </div>
           </motion.div>
           
@@ -110,10 +110,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+            >
             <button
-              onClick={toggleContactForm}
+            onClick={toggleContactForm}
               className="btn-primary hover:scale-105 transform transition-all duration-300 flex items-center gap-2 text-lg px-8 py-4"
             >
               <Mail className="w-5 h-5" />

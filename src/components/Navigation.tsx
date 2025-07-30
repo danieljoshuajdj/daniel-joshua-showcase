@@ -43,8 +43,8 @@ const Navigation = () => {
       transition={{ duration: 0.8 }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled 
-          ? 'bg-primary/95 backdrop-blur-lg shadow-elegant' 
-          : 'bg-primary/90'
+          ? 'bg-white backdrop-blur-lg shadow-elegant' 
+          : 'bg-whitee'
       }`}
     >
       <div className="container mx-auto px-6">
@@ -55,7 +55,7 @@ const Navigation = () => {
             className="font-bold text-xl text-white cursor-pointer"
             onClick={() => scrollToSection('hero')}
           >
-            {portfolioData.personalInfo.name}
+            {portfolioData.personalInfo.name} 
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -70,7 +70,7 @@ const Navigation = () => {
                   currentSection === item.id
                     ? 'text-success-glow'
                     : 'text-white/80 hover:text-success-glow'
-                }`}
+                } ${scrolled ? 'text-black' : 'text-white'}` }
               >
                 {item.label}
               </motion.button>
