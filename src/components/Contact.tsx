@@ -5,6 +5,7 @@ import portfolioData from '../data/portfolio.json';
 import ConfirmDialog from './ui/ConfirmDialog';
 import { Toaster } from './ui/toaster';
 import { useForm, ValidationError } from '@formspree/react';
+import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
   const { 
@@ -17,12 +18,59 @@ const Contact = () => {
     toggleContactForm, 
     submitContactForm,
     showConfirm,
-    hideConfirm
+    hideConfirm,
+    resetContactForm
   } = usePortfolioStore();
 
+  const { toast } = useToast();
+  const [quickFormState, handleQuickSubmit] = useForm("xanbboyl");
+  const [fullFormState, handleFullSubmit] = useForm("xanbboyl");
+
   const handleFormSubmit = () => {
-    showConfirm(() => submitContactForm());
+    showConfirm(() => {
+      handleFullSubmit({
+        name: contactForm.name,
+        email: contactForm.email,
+        message: contactForm.message,
+        jobRequirements: contactForm.jobRequirements
+      });
+    });
   };
+
+  const handleQuickFormSubmit = (e) => {
+    e.preventDefault();
+    showConfirm(() => {
+      handleQuickSubmit(e);
+    });
+  };
+
+  // Handle success states
+  if (quickFormState.succeeded) {
+    toast({
+      title: "Message Sent Successfully!",
+      description: "Thank you for your message. I'll get back to you soon!",
+      duration: 5000,
+    });
+    resetContactForm();
+    // Reset form state after showing toast
+    setTimeout(() => {
+      quickFormState.succeeded = false;
+    }, 100);
+  }
+
+  if (fullFormState.succeeded) {
+    toast({
+      title: "Application Submitted Successfully!",
+      description: "Thank you for your detailed application. I'll review it and get back to you soon!",
+      duration: 5000,
+    });
+    resetContactForm();
+    toggleContactForm();
+    // Reset form state after showing toast
+    setTimeout(() => {
+      fullFormState.succeeded = false;
+    }, 100);
+  }
 
   const contactMethods = [
     {
@@ -50,11 +98,6 @@ const Contact = () => {
       href: portfolioData.personalInfo.github,
     },
   ];
-
-  const [formState, handleSubmit] = useForm("xanbboyl");
-  if (formState.succeeded) {
-    return <p>Thanks for joining!</p>;
-}
   return (
     <section id="contact" className="py-20 bg-section">
       <div className="container mx-auto px-6">
@@ -134,7 +177,7 @@ const Contact = () => {
           >
             <h3 className="text-2xl font-bold text-card-foreground mb-6">Quick Message</h3>
             
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleQuickFormSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-card-foreground mb-2">
                   Your Name *
@@ -147,12 +190,13 @@ const Contact = () => {
                   onChange={(e) => updateContactForm('name', e.target.value)}
                   placeholder="Enter your name"
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                  required
                 />
                 <ValidationError 
-        prefix="Name" 
-        field="name"
-        errors={formState.errors}
-      />
+                  prefix="Name" 
+                  field="name"
+                  errors={quickFormState.errors}
+                />
               </div>
               
               <div>
@@ -167,12 +211,13 @@ const Contact = () => {
                   onChange={(e) => updateContactForm('email', e.target.value)}
                   placeholder="your@email.com"
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                  required
                 />
-                 <ValidationError 
-        prefix="Email" 
-        field="email"
-        errors={formState.errors}
-      />
+                <ValidationError 
+                  prefix="Email" 
+                  field="email"
+                  errors={quickFormState.errors}
+                />
               </div>
               
               <div>
@@ -187,21 +232,22 @@ const Contact = () => {
                   placeholder="Tell me about your project..."
                   rows={3}
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 resize-none"
+                  required
                 />
-                 <ValidationError 
-        prefix="Message" 
-        field="message"
-        errors={formState.errors}
-      />
+                <ValidationError 
+                  prefix="Message" 
+                  field="message"
+                  errors={quickFormState.errors}
+                />
               </div>
               
               <div className="pt-4 space-y-3">
                 <button
-                  // onClick={handleFormSubmit}
-                  disabled={isLoading}
+                  type="submit"
+                  disabled={quickFormState.submitting}
                   className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isLoading ? (
+                  {quickFormState.submitting ? (
                     <>
                       <Loader className="w-5 h-5 animate-spin" />
                       Sending...
@@ -214,6 +260,7 @@ const Contact = () => {
                   )}
                 </button>
                 <button
+                  type="button"
                   onClick={toggleContactForm}
                   className="w-full px-4 py-2 text-primary hover:text-primary/80 transition-colors duration-200"
                 >
@@ -256,18 +303,30 @@ const Contact = () => {
                 </div>
 
                 {/* Form */}
-                <div className="space-y-6">
+                <form 
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleFormSubmit();
+                  }} 
+                  className="space-y-6"
+                >
                   <div>
                     <label className="block text-sm font-medium text-card-foreground mb-2">
                       Your Name *
                     </label>
                     <input
                       type="text"
+                      name="name"
                       value={contactForm.name}
                       onChange={(e) => updateContactForm('name', e.target.value)}
                       placeholder="Enter your full name"
                       className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
                       required
+                    />
+                    <ValidationError 
+                      prefix="Name" 
+                      field="name"
+                      errors={fullFormState.errors}
                     />
                   </div>
 
@@ -277,11 +336,17 @@ const Contact = () => {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       value={contactForm.email}
                       onChange={(e) => updateContactForm('email', e.target.value)}
                       placeholder="your@email.com"
                       className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
                       required
+                    />
+                    <ValidationError 
+                      prefix="Email" 
+                      field="email"
+                      errors={fullFormState.errors}
                     />
                   </div>
 
@@ -290,12 +355,18 @@ const Contact = () => {
                       Message *
                     </label>
                     <textarea
+                      name="message"
                       value={contactForm.message}
                       onChange={(e) => updateContactForm('message', e.target.value)}
                       placeholder="Tell me about your project and how I can help..."
                       rows={4}
                       className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 resize-none"
                       required
+                    />
+                    <ValidationError 
+                      prefix="Message" 
+                      field="message"
+                      errors={fullFormState.errors}
                     />
                   </div>
 
@@ -304,20 +375,26 @@ const Contact = () => {
                       Job Requirements
                     </label>
                     <textarea
+                      name="jobRequirements"
                       value={contactForm.jobRequirements}
                       onChange={(e) => updateContactForm('jobRequirements', e.target.value)}
                       placeholder="Describe the job requirements, tech stack, timeline, etc. (optional)"
                       rows={3}
                       className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 resize-none"
                     />
+                    <ValidationError 
+                      prefix="Job Requirements" 
+                      field="jobRequirements"
+                      errors={fullFormState.errors}
+                    />
                   </div>
 
                   <button
-                    onClick={handleFormSubmit}
-                    disabled={isLoading}
+                    type="submit"
+                    disabled={fullFormState.submitting}
                     className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? (
+                    {fullFormState.submitting ? (
                       <>
                         <Loader className="w-5 h-5 animate-spin" />
                         Sending...
@@ -329,7 +406,7 @@ const Contact = () => {
                       </>
                     )}
                   </button>
-                </div>
+                </form>
               </motion.div>
             </motion.div>
           )}
