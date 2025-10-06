@@ -4,8 +4,8 @@
     "title": "React JS Developer",
     "phone": "+91 8754860740",
     "email": "danieljoshuaisrael@protonmail.com",
-    "linkedin": "https://linkedin.com/in/danieljoshua",
-    "github": "https://github.com/danieljoshua",
+    "linkedin": "https://www.linkedin.com/in/danieljoshua-j",
+    "github": "https://github.com/danieljoshuajdj",
     "profileImage": "/lovable-uploads/da949b13-5fa4-494e-bf34-b3106f8253b7.png"
   },
   "typingText": [
@@ -85,6 +85,7 @@
   ],
   "softSkills": [
     "Teamwork",
+    "Client handling",
     "Problem-solving", 
     "Communication",
     "Attention to Detail",
@@ -175,6 +176,19 @@
       "title": "No-Code Project Management",
       "description": "Innovative project management application that manages project stages and timelines without requiring backend coding expertise.",
       "technologies": ["React JS", "Redux Toolkit", "Zustand", "CSS3"],
+      "features": [
+        "Drag-and-drop project boards",
+        "Timeline visualization",
+        "Team collaboration tools",
+        "Progress tracking"
+      ],
+      "industry": "Project Management"
+    },
+    {
+      "id": 7,
+      "title": "Tiles E-commerce",
+      "description": "Attractive Tiles display website where people can connect with the seller and dealers of the tiles with an admin panel to update the data.",
+      "technologies": ["React JS", "React Query", "Zustand", "CSS3","SCSS"],
       "features": [
         "Drag-and-drop project boards",
         "Timeline visualization",
