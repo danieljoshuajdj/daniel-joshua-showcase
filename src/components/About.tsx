@@ -4,8 +4,8 @@ import portfolioData from '../data/portfolio.json';
 
 const About = () => {
   const stats = [
-    { icon: Code, label: 'Projects Completed', value: '7+' },
-    { icon: Users, label: 'Years Experience', value: '1+' },
+    { icon: Code, label: 'Projects Completed', value: '9+' },
+    { icon: Users, label: 'Years Experience', value: '2+' },
     { icon: Target, label: 'Industries Served', value: '5+' },
     { icon: Award, label: 'Certifications', value: '2+' },
   ];
