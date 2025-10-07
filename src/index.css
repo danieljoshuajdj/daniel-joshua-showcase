@@ -41,7 +41,10 @@
     --ring: 224 76% 48%;
     
     /* Professional Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(224 76% 48%), hsl(162 73% 46%));
+    /* --gradient-hero: linear-gradient(135deg, hsl(224 76% 48%), hsl(162 73% 46%)); */
+    --gradient-hero: linear-gradient(135deg, hsl(313.85deg 100% 9.53%), hsl(162deg 66.59% 15.22%));
+
+    
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(224 16% 98%));
     --gradient-accent: linear-gradient(90deg, hsl(224 76% 48% / 0.1), hsl(162 73% 46% / 0.1));
     
