@@ -67,7 +67,7 @@ const Hero = () => {
                 alt={portfolioData.personalInfo.name}
                 className="w-32 h-32 md:w-64 md:h-64 rounded-full object-cover mx-auto border-4 border-white/30 shadow-2xl"
               />
-              <div className="absolute -inset-5 rounded-full bg-gradient-to-tr from-primary/10 to-success/20"></div>
+              <div className="absolute -inset-5 rounded-full bg-gradient-to-tr from-primary/10 to-success/2"></div>
             </div>
           </motion.div>
           
