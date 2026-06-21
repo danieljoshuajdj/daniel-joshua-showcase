@@ -37,7 +37,7 @@ const Hero = () => {
   }, [displayText, isDeleting, currentTextIndex, typingTexts]);
 
   const downloadResumeFunc = ()=>{
-    window.open("https://drive.google.com/file/d/1WNgnH_ETxPq3GWjJNk5VyDkDKwFnFd_v/view?usp=drivesdk","_blank",'noopener,noreferrer')
+    window.open("https://drive.google.com/file/d/15TiZWAl8HvmcKVQ_KKx4TUa6DKVBe_--/view?usp=sharing","_blank",'noopener,noreferrer')
   }
   return (
     <section className="min-h-screen bg-hero flex items-center justify-center relative overflow-hidden">
